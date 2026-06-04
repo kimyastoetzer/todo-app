@@ -4,13 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do App</title>
+    
     <style>
+        /* ===================================
+           GLOBALE STYLES & RESET
+           =================================== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        /* Hauptlayout mit Gradient-Hintergrund */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -21,6 +26,11 @@
             padding: 20px;
         }
 
+        /* ===================================
+           CONTAINER & HAUPTSTRUKTUR
+           =================================== */
+        
+        /* Weißer Container für die App */
         .container {
             background: white;
             border-radius: 15px;
@@ -30,6 +40,7 @@
             padding: 30px;
         }
 
+        /* Hauptüberschrift */
         h1 {
             color: #333;
             text-align: center;
@@ -37,12 +48,18 @@
             font-size: 2em;
         }
 
+        /* ===================================
+           EINGABEBEREICH
+           =================================== */
+        
+        /* Container für Input und Button */
         .input-container {
             display: flex;
             gap: 10px;
             margin-bottom: 25px;
         }
 
+        /* Textfeld für neue Aufgaben */
         #todoInput {
             flex: 1;
             padding: 12px 15px;
@@ -52,11 +69,13 @@
             transition: border-color 0.3s;
         }
 
+        /* Fokus-Effekt für Textfeld */
         #todoInput:focus {
             outline: none;
             border-color: #667eea;
         }
 
+        /* Button zum Hinzufügen von Aufgaben */
         #addBtn {
             padding: 12px 25px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -69,19 +88,27 @@
             transition: transform 0.2s, box-shadow 0.2s;
         }
 
+        /* Hover-Effekt für Button */
         #addBtn:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
         }
 
+        /* Aktiv-Effekt für Button */
         #addBtn:active {
             transform: translateY(0);
         }
 
+        /* ===================================
+           TODO-LISTE
+           =================================== */
+        
+        /* Liste ohne Aufzählungszeichen */
         #todoList {
             list-style: none;
         }
 
+        /* Einzelnes Todo-Element */
         .todo-item {
             background: #f8f9fa;
             padding: 15px;
@@ -94,6 +121,7 @@
             animation: slideIn 0.3s ease-out;
         }
 
+        /* Animation beim Hinzufügen neuer Todos */
         @keyframes slideIn {
             from {
                 opacity: 0;
@@ -105,32 +133,38 @@
             }
         }
 
+        /* Hover-Effekt für Todo-Elemente */
         .todo-item:hover {
             background: #e9ecef;
             transform: translateX(5px);
         }
 
+        /* Stil für erledigte Aufgaben */
         .todo-item.completed {
             opacity: 0.6;
         }
 
+        /* Durchgestrichener Text für erledigte Aufgaben */
         .todo-item.completed .todo-text {
             text-decoration: line-through;
             color: #999;
         }
 
+        /* Checkbox für Aufgaben */
         .todo-checkbox {
             width: 20px;
             height: 20px;
             cursor: pointer;
         }
 
+        /* Text der Aufgabe */
         .todo-text {
             flex: 1;
             color: #333;
             font-size: 16px;
         }
 
+        /* Löschen-Button */
         .delete-btn {
             background: #ff4757;
             color: white;
@@ -142,10 +176,16 @@
             transition: background 0.3s;
         }
 
+        /* Hover-Effekt für Löschen-Button */
         .delete-btn:hover {
             background: #ff3838;
         }
 
+        /* ===================================
+           LEERZUSTAND & STATISTIKEN
+           =================================== */
+        
+        /* Nachricht wenn keine Aufgaben vorhanden */
         .empty-state {
             text-align: center;
             color: #999;
@@ -153,6 +193,7 @@
             font-size: 18px;
         }
 
+        /* Container für Statistiken */
         .stats {
             margin-top: 20px;
             padding-top: 20px;
@@ -163,22 +204,144 @@
             font-size: 14px;
         }
 
+        /* Einzelne Statistik */
         .stat-item {
             text-align: center;
         }
 
+        /* Große Zahl in Statistik */
         .stat-number {
             font-size: 24px;
             font-weight: bold;
             color: #667eea;
             display: block;
         }
+
+        /* ===================================
+           FILTER-BUTTONS
+           =================================== */
+        
+        /* Container für Filter-Buttons */
+        .filter-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        /* Filter-Button Styles */
+        .filter-btn {
+            padding: 8px 20px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        /* Aktiver Filter-Button */
+        .filter-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        /* Hover-Effekt für Filter-Buttons */
+        .filter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 10px rgba(102, 126, 234, 0.3);
+        }
+
+        /* ===================================
+           PRIORITÄTS-BADGES
+           =================================== */
+        
+        /* Prioritäts-Badge */
+        .priority-badge {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-left: 8px;
+        }
+
+        /* Hohe Priorität */
+        .priority-high {
+            background: #ff4757;
+            color: white;
+        }
+
+        /* Mittlere Priorität */
+        .priority-medium {
+            background: #ffa502;
+            color: white;
+        }
+
+        /* Niedrige Priorität */
+        .priority-low {
+            background: #2ed573;
+            color: white;
+        }
+
+        /* Prioritäts-Auswahl */
+        #prioritySelect {
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: border-color 0.3s;
+            background: white;
+        }
+
+        #prioritySelect:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        /* ===================================
+           SUCHE
+           =================================== */
+        
+        /* Such-Container */
+        .search-container {
+            margin-bottom: 20px;
+        }
+
+        /* Such-Eingabefeld */
+        #searchInput {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        #searchInput:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        /* Hervorhebung von Suchergebnissen */
+        .highlight {
+            background-color: #fff59d;
+            font-weight: bold;
+        }
     </style>
 </head>
+
 <body>
+    <!-- ===================================
+         HAUPTCONTAINER DER APP
+         =================================== -->
     <div class="container">
+        <!-- Überschrift -->
         <h1>📝 Meine To-Do Liste</h1>
         
+        <!-- Eingabebereich für neue Aufgaben -->
         <div class="input-container">
             <input 
                 type="text" 
@@ -186,11 +349,35 @@
                 placeholder="Neue Aufgabe hinzufügen..."
                 autocomplete="off"
             >
+            <select id="prioritySelect">
+                <option value="low">Niedrig</option>
+                <option value="medium" selected>Mittel</option>
+                <option value="high">Hoch</option>
+            </select>
             <button id="addBtn">Hinzufügen</button>
         </div>
 
+        <!-- Suchfeld -->
+        <div class="search-container">
+            <input 
+                type="text" 
+                id="searchInput" 
+                placeholder="Aufgaben durchsuchen..."
+                autocomplete="off"
+            >
+        </div>
+
+        <!-- Filter-Buttons -->
+        <div class="filter-container">
+            <button class="filter-btn active" data-filter="all">Alle</button>
+            <button class="filter-btn" data-filter="active">Offen</button>
+            <button class="filter-btn" data-filter="completed">Erledigt</button>
+        </div>
+
+        <!-- Liste aller Aufgaben -->
         <ul id="todoList"></ul>
 
+        <!-- Statistikbereich -->
         <div class="stats">
             <div class="stat-item">
                 <span class="stat-number" id="totalTasks">0</span>
@@ -207,62 +394,160 @@
         </div>
     </div>
 
+    <!-- ===================================
+         JAVASCRIPT LOGIK
+         =================================== -->
     <script>
-        // Elemente abrufen
+        // ===================================
+        // DOM-ELEMENTE ABRUFEN
+        // ===================================
+        
         const todoInput = document.getElementById('todoInput');
         const addBtn = document.getElementById('addBtn');
         const todoList = document.getElementById('todoList');
         const totalTasksEl = document.getElementById('totalTasks');
         const completedTasksEl = document.getElementById('completedTasks');
         const pendingTasksEl = document.getElementById('pendingTasks');
+        const prioritySelect = document.getElementById('prioritySelect');
+        const searchInput = document.getElementById('searchInput');
+        const filterBtns = document.querySelectorAll('.filter-btn');
 
-        // Todos aus LocalStorage laden
+        // ===================================
+        // DATEN INITIALISIEREN
+        // ===================================
+        
+        // Todos aus LocalStorage laden oder leeres Array erstellen
         let todos = JSON.parse(localStorage.getItem('todos')) || [];
+        
+        // Aktueller Filter (all, active, completed)
+        let currentFilter = 'all';
+        
+        // Aktueller Suchbegriff
+        let currentSearch = '';
 
-        // Initialisierung
+        // ===================================
+        // EVENT LISTENER REGISTRIEREN
+        // ===================================
+        
+        // App beim Laden initialisieren
         renderTodos();
 
-        // Event Listener
+        // Button-Klick Event
         addBtn.addEventListener('click', addTodo);
+        
+        // Enter-Taste im Eingabefeld
         todoInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
                 addTodo();
             }
         });
 
-        // Funktion: Todo hinzufügen
+        // Suchfeld Event
+        searchInput.addEventListener('input', (e) => {
+            currentSearch = e.target.value.toLowerCase();
+            renderTodos();
+        });
+
+        // Filter-Button Events
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Aktive Klasse entfernen
+                filterBtns.forEach(b => b.classList.remove('active'));
+                // Aktive Klasse hinzufügen
+                btn.classList.add('active');
+                // Filter setzen
+                currentFilter = btn.dataset.filter;
+                renderTodos();
+            });
+        });
+
+        // ===================================
+        // HAUPTFUNKTIONEN
+        // ===================================
+        
+        /**
+         * Fügt eine neue Aufgabe zur Liste hinzu
+         * Validiert die Eingabe und speichert die Aufgabe
+         */
         function addTodo() {
             const text = todoInput.value.trim();
             
+            // Validierung: Leere Eingaben verhindern
             if (text === '') {
                 alert('Bitte gib eine Aufgabe ein!');
                 return;
             }
 
+            // Neues Todo-Objekt erstellen
             const todo = {
                 id: Date.now(),
                 text: text,
-                completed: false
+                completed: false,
+                priority: prioritySelect.value,
+                createdAt: new Date().toISOString()
             };
 
+            // Todo zur Liste hinzufügen und speichern
             todos.push(todo);
             saveTodos();
             renderTodos();
+            
+            // Eingabefeld zurücksetzen und fokussieren
             todoInput.value = '';
             todoInput.focus();
         }
 
-        // Funktion: Todos rendern
+        /**
+         * Rendert alle Todos in der Liste
+         * Zeigt entweder die Todos oder eine Leermeldung an
+         */
         function renderTodos() {
+            // Liste leeren
             todoList.innerHTML = '';
 
-            if (todos.length === 0) {
-                todoList.innerHTML = '<div class="empty-state">Keine Aufgaben vorhanden. Füge eine neue hinzu! 🎉</div>';
+            // Todos filtern
+            let filteredTodos = todos.filter(todo => {
+                // Filter nach Status
+                if (currentFilter === 'active' && todo.completed) return false;
+                if (currentFilter === 'completed' && !todo.completed) return false;
+                
+                // Filter nach Suchbegriff
+                if (currentSearch && !todo.text.toLowerCase().includes(currentSearch)) {
+                    return false;
+                }
+                
+                return true;
+            });
+
+            // Leerzustand anzeigen wenn keine Todos vorhanden
+            if (filteredTodos.length === 0) {
+                if (todos.length === 0) {
+                    todoList.innerHTML = '<div class="empty-state">Keine Aufgaben vorhanden. Füge eine neue hinzu! 🎉</div>';
+                } else {
+                    todoList.innerHTML = '<div class="empty-state">Keine Aufgaben gefunden. 🔍</div>';
+                }
             } else {
-                todos.forEach(todo => {
+                // Alle Todos durchlaufen und rendern
+                filteredTodos.forEach(todo => {
+                    // Listenelement erstellen
                     const li = document.createElement('li');
                     li.className = `todo-item ${todo.completed ? 'completed' : ''}`;
                     
+                    // Prioritäts-Badge Text
+                    const priorityText = {
+                        'high': 'Hoch',
+                        'medium': 'Mittel',
+                        'low': 'Niedrig'
+                    };
+                    
+                    // Text mit Hervorhebung
+                    let displayText = escapeHtml(todo.text);
+                    if (currentSearch) {
+                        const regex = new RegExp(`(${escapeRegex(currentSearch)})`, 'gi');
+                        displayText = displayText.replace(regex, '<span class="highlight">$1</span>');
+                    }
+                    
+                    // HTML-Struktur für Todo-Element
                     li.innerHTML = `
                         <input 
                             type="checkbox" 
@@ -270,55 +555,93 @@
                             ${todo.completed ? 'checked' : ''}
                             onchange="toggleTodo(${todo.id})"
                         >
-                        <span class="todo-text">${escapeHtml(todo.text)}</span>
+                        <span class="todo-text">${displayText}</span>
+                        <span class="priority-badge priority-${todo.priority || 'medium'}">${priorityText[todo.priority || 'medium']}</span>
                         <button class="delete-btn" onclick="deleteTodo(${todo.id})">Löschen</button>
                     `;
                     
+                    // Element zur Liste hinzufügen
                     todoList.appendChild(li);
                 });
             }
 
+            // Statistiken aktualisieren
             updateStats();
         }
 
-        // Funktion: Todo Status umschalten
+        /**
+         * Schaltet den Erledigt-Status einer Aufgabe um
+         * @param {number} id - Die ID der Aufgabe
+         */
         function toggleTodo(id) {
+            // Todo anhand der ID finden
             const todo = todos.find(t => t.id === id);
+            
             if (todo) {
+                // Status umschalten
                 todo.completed = !todo.completed;
                 saveTodos();
                 renderTodos();
             }
         }
 
-        // Funktion: Todo löschen
+        /**
+         * Löscht eine Aufgabe aus der Liste
+         * @param {number} id - Die ID der zu löschenden Aufgabe
+         */
         function deleteTodo(id) {
+            // Alle Todos außer dem zu löschenden behalten
             todos = todos.filter(t => t.id !== id);
             saveTodos();
             renderTodos();
         }
 
-        // Funktion: Todos speichern
+        // ===================================
+        // HILFSFUNKTIONEN
+        // ===================================
+        
+        /**
+         * Speichert alle Todos im LocalStorage
+         * Ermöglicht Persistenz über Browser-Neustarts hinweg
+         */
         function saveTodos() {
             localStorage.setItem('todos', JSON.stringify(todos));
         }
 
-        // Funktion: Statistiken aktualisieren
+        /**
+         * Aktualisiert die Statistik-Anzeige
+         * Berechnet Gesamt-, Erledigte und Offene Aufgaben
+         */
         function updateStats() {
+            // Statistiken berechnen
             const total = todos.length;
             const completed = todos.filter(t => t.completed).length;
             const pending = total - completed;
 
+            // Anzeige aktualisieren
             totalTasksEl.textContent = total;
             completedTasksEl.textContent = completed;
             pendingTasksEl.textContent = pending;
         }
 
-        // Funktion: HTML escapen (Sicherheit)
+        /**
+         * Escaped HTML-Zeichen zur Verhinderung von XSS-Angriffen
+         * @param {string} text - Der zu escapende Text
+         * @returns {string} - Der gesicherte Text
+         */
         function escapeHtml(text) {
             const div = document.createElement('div');
             div.textContent = text;
             return div.innerHTML;
+        }
+
+        /**
+         * Escaped Regex-Sonderzeichen
+         * @param {string} text - Der zu escapende Text
+         * @returns {string} - Der gesicherte Text
+         */
+        function escapeRegex(text) {
+            return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
         }
     </script>
 </body>
